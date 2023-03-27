@@ -1,5 +1,6 @@
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import { Container } from "../Container/Container";
 
 export const BarsChart = ({ data }: { data: IAuthorData[] }) => {
 
@@ -8,7 +9,7 @@ export const BarsChart = ({ data }: { data: IAuthorData[] }) => {
   }
 
  return (
-   <>
+   <Container>
      {data?.length ? (
        <div style={{ marginTop: "20px", overflowX: "scroll" }}>
          <BarChart
@@ -29,7 +30,7 @@ export const BarsChart = ({ data }: { data: IAuthorData[] }) => {
      ) : (
        <></>
      )}
-   </>
+   </Container>
  );
 
 }
