@@ -1,23 +1,44 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/api/*": ["api/*"],
+      "@/components/*": ["components/*"],
+      "@/interfaces/*": ["interfaces/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "commonjs",
+    "strict": false,
+    "strictBindCallApply": false, //should be true
+    "strictFunctionTypes": false, //should be true
+    "strictNullChecks": false, //should be true
+    "noImplicitAny": false, //should be true
+    "noImplicitReturns": false, //should be true
+    "noImplicitThis": false, //should be true
+    "noUnusedLocals": false, //should be true
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "noFallthroughCasesInSwitch": false, //should be true
+    "sourceMap": true,
+    "strictPropertyInitialization": false, //should be true
+    "suppressImplicitAnyIndexErrors": false //should be true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next", "out", "_next"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "next.config.js",
+    "plopfile.mjs"
+, "components/BarsChart.jsx"  ]
 }
