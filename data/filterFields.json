@@ -1,0 +1,22 @@
+[
+ {
+  "label":"All",
+  "value":"all"
+ },
+ {
+  "label":"Blogs",
+  "value":"blog"
+ },
+ {
+  "label":"News",
+  "value":"news"
+ },
+ {
+  "label":"Videos",
+  "value":"video"
+ },
+ {
+  "label":"Podcasts",
+  "value":"podcast"
+ }
+]

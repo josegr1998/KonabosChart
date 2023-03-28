@@ -3,11 +3,11 @@ import { deliverySdk } from "./DeliveryClient";
 export class KenticoHttpRequest {
   private deliveryClient = deliverySdk;
 
-  public async getData<T>(type: string): Promise<T> {
+  public async getData<T>(types: string[]): Promise<T> {
     
     const response = await this.deliveryClient
       .items()
-      .type(type)
+      .types(types)
       .toPromise()
       .then((result) => result)
       .catch((error) => console.log('Error on getData KenticoHttpRequest',error));

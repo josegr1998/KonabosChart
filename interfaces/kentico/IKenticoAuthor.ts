@@ -6,6 +6,6 @@ export interface IKenticoAuthor {
     last_name: {
       value: string;
     };
-  };
+  }[];
 }
 
