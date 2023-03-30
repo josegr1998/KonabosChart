@@ -5,29 +5,33 @@ import { useEffect, useState } from "react";
 import { BarsChart } from "../BarsChart/BarsChart";
 import { Filter } from "../Filter/Filter";
 import { SectionTitle } from "../SectionTitle/SectionTitle";
+import { IFilterState } from "../Filter/IFIlterState";
+import { useFilters } from "hooks/useFilters";
 
 export const Homepage = ({ data }: { data: IAuthorData[] }) => {
 
   const router = useRouter();
 
-  const [itemType,setItemType] = useState<string>('all');
-
+  const {filterState,onFilterChange} = useFilters()
+  
   useEffect(()=>{
     
-    if(router.query?.t)
-    setItemType(router.query.t?.toString())
+    let query:string = '';
 
-  },[router.asPath])
+    Object.keys(filterState).map((state)=>{
 
-  const onFilterChange = (type:string)=>{
-   if(type){
-    router.push(`/?t=${type}`)
-   }
-  }
+      query+=`${state}=${filterState[state]}&`
+
+    })
+
+    router.push(`?${query}`)
+
+  }, [filterState])
+
 
   return <div className="mt-8">
-    <SectionTitle title={`MOST ${getTitleLabel(itemType).toUpperCase()}`}/>
-    <Filter onChange={onFilterChange} value={itemType}/>
+    <SectionTitle title={`MOST ${getTitleLabel(filterState.type).toUpperCase()}`}/>
+    <Filter onChange={onFilterChange} states={filterState}/>
     <BarsChart data={data}/>
   </div>
 };

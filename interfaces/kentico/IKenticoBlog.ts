@@ -1,5 +1,7 @@
 import { IKenticoAuthor } from "./IKenticoAuthor";
+import { IKenticoDate } from "./IKenticoDate";
 
 export interface IKenticoBlog {
- author: IKenticoAuthor;
+  author: IKenticoAuthor;
+  date: IKenticoDate;
 }

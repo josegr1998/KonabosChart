@@ -15,9 +15,19 @@ export default function Home({ data }: { data: IAuthorData[] }) {
   const kenticoHttpRequest = new KenticoHttpRequest();
 
   // async function fetchData(){
-  //   const data = await kenticoHttpRequest.getData<IITems<IKenticoBlog>>(['news']);
+  //   const data = await kenticoHttpRequest.getData<IITems<IKenticoBlog>>(['blog', 'news', 'video', 'podcast']);
 
-  //   console.log('data', data)
+  //   const selectedYear = '2022';
+
+  //   const filteredData = data.items.filter((item) => {
+
+  //     const itemYear = item.date.rawData.value?.split('-')[0];
+
+  //     if(itemYear >= selectedYear){
+  //       return item;
+  //     }
+
+  //   })
 
   // }
 
@@ -35,7 +45,11 @@ export const getServerSideProps: GetServerSideProps<{ data: any }> = async (
 
   const kenticoPrase = new KenticoParse();
 
-  const contentType = context.query?.t;
+  let contentDate = 'All';
+
+  const contentType = context.query?.type;
+
+  contentDate = context.query?.date === 'All' ? '2015' : (context.query?.date as string)
 
   let type = [];
 
@@ -43,12 +57,22 @@ export const getServerSideProps: GetServerSideProps<{ data: any }> = async (
     type.push(contentType.toString());
   }
   else{
-    type = ['blog', 'video', 'news', 'podcast']
+    type = ['blog', 'news', 'video', 'podcast']
   }
 
   const data = await kenticoHttpRequest.getData<IITems<IKenticoBlog>>(type);
 
-  const authors = data.items.map((item) => {
+  const filteredData = data.items.filter((item) => {
+
+    const itemYear = item.date.rawData.value?.split('-')[0];
+
+    if (itemYear >= contentDate) {
+      return item;
+    }
+
+  })
+
+  const authors = filteredData.map((item) => {
     if(item.author.value.length > 0){
       return kenticoPrase.authorParse(item.author.value[0]);
     }
