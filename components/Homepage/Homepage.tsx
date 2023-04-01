@@ -11,8 +11,6 @@ import { useFilters } from "hooks/useFilters";
 export const Homepage = ({ data }: { data: IAuthorData[] }) => {
 
   const {filterState,onFilterChange,onDisplayChange} = useFilters()
-  
-
   return <div className="mt-8">
     <SectionTitle title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`}/>
     <Filter onChange={onFilterChange} states={filterState} onDisplayChange={onDisplayChange}/>

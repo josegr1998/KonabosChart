@@ -8,6 +8,11 @@ export class KenticoParse extends KenticoBaseParser {
       name: `${this.valueParse(author?.first_name)} ${this.valueParse(
         author?.last_name
       )}`,
+      caricature:{
+        url:author.caricature.value[0].url
+      },
+      experience:author.experience.rawData.value,
+      jobTitle:author.job_title.value
     };
 
     return authorPased;

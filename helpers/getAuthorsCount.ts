@@ -5,20 +5,26 @@ export const getAuthorsCount = (authors: IAuthor[]): IAuthorData[] => {
   const authorNames: any = [];
   const authorCount: any = [];
 
-  authors.forEach((author: any, index: number) => {
-    if (authorNames.includes(author.name)) {
-      const authorIndex = authorNames.indexOf(author.name);
+  authors.forEach(({name,experience,jobTitle,caricature}: IAuthor, index: number) => {
 
-      const authorObj = {
-        name: author.name,
-        numberOfBlogPosts: authorCount[authorIndex].numberOfBlogPosts + 1,
-      };
+    const authorObj = {
+      name,
+      caricature,
+      experience,
+      jobTitle,
+      numberOfBlogPosts:null,
+    };
 
+    if (authorNames.includes(name)) {
+      const authorIndex = authorNames.indexOf(name);
+
+      authorObj.numberOfBlogPosts = authorCount[authorIndex].numberOfBlogPosts + 1,
+      
       authorCount[authorIndex] = authorObj;
     } else {
-      authorNames.push(author.name);
+      authorNames.push(name);
       authorCount.push({
-        name: author.name,
+        ...authorObj,
         numberOfBlogPosts: 1,
       });
     }
