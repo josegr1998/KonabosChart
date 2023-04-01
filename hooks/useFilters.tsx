@@ -1,35 +1,60 @@
 import { IFilterState } from "@/components/Filter/IFIlterState";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 export const useFilters = () => {
   const router = useRouter();
 
   const [filterState, setFilterState] = useState<IFilterState>({
-    type: (router?.query?.type as string) ?? "All",
-    date: (router?.query?.date as string) ?? "All",
+    type: {
+      value: (router?.query?.type as string) ?? "All",
+      isOpen:false
+    },
+    date: {
+      value: (router?.query?.date as string) ?? "All",
+      isOpen:false
+    }
   });
 
   useEffect(() => {
     let query: string = "";
 
     Object.keys(filterState).map((state) => {
-      query += `${state}=${filterState[state]}&`;
+      query += `${state}=${filterState[state].value}&`;
     });
 
     router.push(`?${query}`);
   }, [filterState]);
 
   const onFilterChange = (name: string, value: string) => {
+    
     setFilterState({
       ...filterState,
-      [name]: value,
+      [name]: {
+        isOpen:false,
+        value
+      },
     });
   };
 
+  const onDisplayChange = (name:string)=>{
+
+    const selectedFilter = filterState[name];
+
+    setFilterState({
+      ...filterState,
+      [name]:{
+        ...selectedFilter,
+        isOpen:!selectedFilter.isOpen
+      }
+    })
+
+  }
+
   return {
    onFilterChange,
-   filterState
+   filterState,
+   onDisplayChange
   }
 
 };

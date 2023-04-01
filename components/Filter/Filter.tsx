@@ -1,24 +1,57 @@
 import filterFields from "../../data/filterFields.json";
-import filterDates from '../../data/dates.json'
+import filterDates from "../../data/dates.json";
 import { IFilterState } from "./IFIlterState";
 
-export const Filter = ({ onChange, states }: { onChange: (type: string,value:string) => void, states: IFilterState }) => {
+export const Filter = ({
+  onChange,
+  states,
+  onDisplayChange,
+}: {
+  onChange: (type: string, value: string) => void;
+  states: IFilterState;
+  onDisplayChange: (type: string) => void;
+}) => {
   return (
     <div className='max-w-7xl m-auto mb-8 flex justify-start gap-x-4'>
-      <h2 className='text-xl'>Filter By</h2>
-      <div>
-        <p>Type</p>
-        <select name='type' onChange={(e) => onChange(e.target.name, e.target.value)} value={states.type}>
-          {filterFields.map(({ value, label }) => (
-            <option value={value}>{label}</option>
+      <div className='relative'>
+        <button
+          className='rounded-md border-2 p-1 w-24 border-brandsPrimaryDark'
+          onClick={() => onDisplayChange("type")}
+        >
+          Type
+        </button>
+        <div
+          className={`${states.type.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
+        mt-2 px-2`}
+        >
+          {filterFields.map((field) => (
+            <div>
+              <button className='hover:text-brandsPrimary' onClick={() => onChange('type', field.value)}>
+                {field.label}
+              </button>
+            </div>
           ))}
-        </select>
+        </div>
       </div>
-      <div>
-        <p>Date</p>
-        <select name='date' onChange={(e) => onChange(e.target.name,e.target.value)} value={states.date}>
-          {filterDates.map((year)=><option value={year}>{year}</option>)}
-        </select>
+      <div className='relative'>
+        <button
+          className='rounded-md border-2 p-1 w-24 border-brandsPrimaryDark'
+          onClick={() => onDisplayChange("date")}
+        >
+          Date
+        </button>
+        <div
+          className={`${states.date.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
+        mt-2 px-2`}
+        >
+          {filterDates.map((field) => (
+            <div>
+              <button className='hover:text-brandsPrimary' onClick={() => onChange('date', field)}>
+                {field}
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

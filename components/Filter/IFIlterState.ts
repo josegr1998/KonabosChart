@@ -1,4 +1,10 @@
 export interface IFilterState {
- type:string;
- date:string
+ type:{
+  value:string,
+  isOpen:boolean
+ };
+ date:{
+  value:string,
+  isOpen:boolean
+ }
 }

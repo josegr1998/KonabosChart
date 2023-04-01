@@ -5,7 +5,7 @@ export const getTitleLabel = (type: string): string => {
 
   const itemType = filterFields.find((item) => item.value === type);
 
-  if (itemType && itemType.value !== 'all') {
+  if (itemType && itemType.value !== 'All') {
     titleLabel = itemType.label;
   } else {
     titleLabel = "Posts";

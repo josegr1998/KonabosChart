@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps<{ data: any }> = async (
 
   let type = [];
 
-  if(contentType && contentType !== 'all') {
+  if(contentType && contentType !== 'All') {
     type.push(contentType.toString());
   }
   else{

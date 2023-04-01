@@ -10,28 +10,12 @@ import { useFilters } from "hooks/useFilters";
 
 export const Homepage = ({ data }: { data: IAuthorData[] }) => {
 
-  const router = useRouter();
-
-  const {filterState,onFilterChange} = useFilters()
+  const {filterState,onFilterChange,onDisplayChange} = useFilters()
   
-  useEffect(()=>{
-    
-    let query:string = '';
-
-    Object.keys(filterState).map((state)=>{
-
-      query+=`${state}=${filterState[state]}&`
-
-    })
-
-    router.push(`?${query}`)
-
-  }, [filterState])
-
 
   return <div className="mt-8">
-    <SectionTitle title={`MOST ${getTitleLabel(filterState.type).toUpperCase()}`}/>
-    <Filter onChange={onFilterChange} states={filterState}/>
+    <SectionTitle title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`}/>
+    <Filter onChange={onFilterChange} states={filterState} onDisplayChange={onDisplayChange}/>
     <BarsChart data={data}/>
   </div>
 };
