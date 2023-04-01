@@ -9,9 +9,9 @@ import { IITems } from "@/interfaces/IItems";
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { BarsChart } from "@/components/BarsChart/BarsChart";
 import { Homepage } from "@/components/Homepage/Homepage";
-import { useEffect } from "react";
 
-export default function Home({ data }: { data: IAuthorData[] }) {
+
+export default function Home({ data,winner }: { data: IAuthorData[],winner:any }) {
   const kenticoHttpRequest = new KenticoHttpRequest();
 
   // async function fetchData(){
@@ -82,11 +82,27 @@ export const getServerSideProps: GetServerSideProps<{ data: any }> = async (
 
   const sortedAuthorsData = authorsData.sort((a, b) => {
     return b.numberOfBlogPosts - a.numberOfBlogPosts;
+  });
+
+  const winner = sortedAuthorsData.reduce((acc,author:IAuthorData,index:number)=>{
+
+    if (index > 0 && acc.numberOfBlogPosts < author.numberOfBlogPosts){
+      acc = author
+    }
+    else if(index === 0){
+      acc = author
+    }
+
+    return acc
+
+  },{
+    numberOfBlogPosts:0,
   })
 
   return {
     props: {
       data: sortedAuthorsData,
+      winner
     },
   };
 };
