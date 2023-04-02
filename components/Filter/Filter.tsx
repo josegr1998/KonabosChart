@@ -24,10 +24,10 @@ export const Filter = ({
           className={`${states.type.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
         mt-2 px-2`}
         >
-          {filterFields.map((field) => (
-            <div>
-              <button className='hover:text-brandsPrimary' onClick={() => onChange('type', field.value)}>
-                {field.label}
+          {filterFields.map(({value,label},index) => (
+            <div key={index}>
+              <button className='hover:text-brandsPrimary' onClick={() => onChange('type', value)}>
+                {label}
               </button>
             </div>
           ))}
@@ -44,8 +44,8 @@ export const Filter = ({
           className={`${states.date.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
         mt-2 px-2`}
         >
-          {filterDates.map((field) => (
-            <div>
+          {filterDates.map((field,index) => (
+            <div key={index}>
               <button className='hover:text-brandsPrimary' onClick={() => onChange('date', field)}>
                 {field}
               </button>
