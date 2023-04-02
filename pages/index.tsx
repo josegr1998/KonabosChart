@@ -36,8 +36,6 @@ export default function Home({ data,winner }: { data: IAuthorData[],winner:IAuth
   //   fetchData();
   // })
 
-  console.log('winner',winner)
-
   return <Homepage data={data} winner={winner}/>;
 }
 

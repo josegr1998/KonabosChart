@@ -24,6 +24,9 @@ export interface IKenticoAuthor {
     job_title: {
       value: string;
     };
+    slug:{
+      value:string
+    }
   }[];
   system: {
     codename: string;

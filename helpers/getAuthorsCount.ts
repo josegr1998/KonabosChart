@@ -5,7 +5,7 @@ export const getAuthorsCount = (authors: IAuthor[]): IAuthorData[] => {
   const authorNames: any = [];
   const authorCount: any = [];
 
-  authors.forEach(({name,experience,jobTitle,caricature}: IAuthor, index: number) => {
+  authors.forEach(({name,experience,jobTitle,caricature,slug}: IAuthor, index: number) => {
 
     const authorObj = {
       name,
@@ -13,6 +13,7 @@ export const getAuthorsCount = (authors: IAuthor[]): IAuthorData[] => {
       experience,
       jobTitle,
       numberOfBlogPosts:null,
+      slug
     };
 
     if (authorNames.includes(name)) {

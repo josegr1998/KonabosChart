@@ -15,6 +15,7 @@ export class KenticoParse extends KenticoBaseParser {
       },
       experience: author.experience.rawData.value,
       jobTitle: author.job_title.value,
+      slug:this.valueParse(author.slug) as string
     };
 
     return authorPased;

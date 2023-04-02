@@ -7,4 +7,5 @@ export interface IAuthor {
   experience:string;
   jobTitle:string;
   numberOfBlogPosts?:number
+  slug:string
 }
