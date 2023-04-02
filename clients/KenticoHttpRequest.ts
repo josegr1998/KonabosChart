@@ -16,16 +16,29 @@ export class KenticoHttpRequest {
     return response as T;
   }
 
-  public async getLatestPosts() {
+  public async getAuthorProfile<T>(authorSlug: string):Promise<T>  {
     const response = await this.deliveryClient
       .items()
-      .containsFilter("elements.author", ["konabos_7e45777"]) //need to update to use dynamic codename
+      .type("person")
+      .equalsFilter("elements.slug", authorSlug)
+      .toPromise()
+      .then((result) => result)
+      .catch((error) =>
+        console.log("Error on getAuthorProfile KenticoHttpRequest", error)
+      );
+    return response as T
+  }
+
+  public async getLatestAuthorPosts<T>(authorCodename:string):Promise<T> {
+    const response = await this.deliveryClient
+      .items()
+      .containsFilter("elements.author", [authorCodename]) //need to update to use dynamic codename
       .toPromise()
       .then((result) => result)
       .catch((error) => {
         console.log("error on getLatestPosts KenticoHttpRequest", error);
       });
 
-      return response;
+    return response as T;
   }
 }

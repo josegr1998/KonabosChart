@@ -21,9 +21,12 @@ export interface IKenticoAuthor {
         value: string;
       };
     };
-    job_title:{
-      value:string
-    }
+    job_title: {
+      value: string;
+    };
   }[];
+  system: {
+    codename: string;
+  };
 }
 
