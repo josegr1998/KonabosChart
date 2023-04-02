@@ -1,5 +1,5 @@
-export const SectionTitle = ({ title }: { title: string }) => (
+export const SectionTitle = ({ title,className }: { title: string,className:string }) => (
   <div>
-    <h2 className='text-center text-3xl font-bold capitalize'>{title}</h2>
+    <h2 className={`text-center text-3xl font-bold capitalize ${className}`}>{title}</h2>
   </div>
 );

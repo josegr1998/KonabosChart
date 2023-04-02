@@ -9,9 +9,10 @@ import { IITems } from "@/interfaces/IItems";
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { BarsChart } from "@/components/BarsChart/BarsChart";
 import { Homepage } from "@/components/Homepage/Homepage";
+import { IAuthor } from "@/interfaces/app/IAuthor";
 
 
-export default function Home({ data,winner }: { data: IAuthorData[],winner:any }) {
+export default function Home({ data,winner }: { data: IAuthorData[],winner:IAuthor }) {
   const kenticoHttpRequest = new KenticoHttpRequest();
 
   // async function fetchData(){
@@ -35,7 +36,9 @@ export default function Home({ data,winner }: { data: IAuthorData[],winner:any }
   //   fetchData();
   // })
 
-  return <Homepage data={data} />;
+  console.log('winner',winner)
+
+  return <Homepage data={data} winner={winner}/>;
 }
 
 export const getServerSideProps: GetServerSideProps<{ data: any }> = async (
