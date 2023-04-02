@@ -5,5 +5,6 @@ export interface IAuthor {
     alt?:string
   },
   experience:string;
-  jobTitle:string
+  jobTitle:string;
+  numberOfBlogPosts?:number
 }
