@@ -31,5 +31,11 @@ export interface IKenticoAuthor {
   system: {
     codename: string;
   };
+  first_name?:{
+    value:string
+  }
+  last_name?:{
+    value:string
+  }
 }
 

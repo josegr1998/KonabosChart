@@ -5,10 +5,12 @@ import { IKenticoBlog } from "@/interfaces/kentico/IKenticoBlog";
 import { IKenticoAuthor } from "@/interfaces/kentico/IKenticoAuthor";
 import { KenticoParse } from "parsers/KenticoParse";
 import { IPostData } from "@/interfaces/app/IPostData";
+import { Posts } from "@/components/Posts/Posts";
+import { LatestPosts } from "@/components/LatestPosts/LatestsPosts";
 
-export default function Latest({ data }: { data: IPostData[] }) {
+export default function Latest({ data,authorName }: { data: IPostData[], authorName:string }) {
 
-  return <div>Hi</div>;
+  return <LatestPosts data={data} authorName={authorName}/>;
 }
 
 export const getServerSideProps: GetServerSideProps<{
@@ -47,9 +49,12 @@ export const getServerSideProps: GetServerSideProps<{
             })
         : [];
 
+        console.log('data.items',data.items[0])
+
     return {
       props: {
-        data: parsedPosts,
+        data: parsedPosts.slice(0,6),
+        authorName:`${data.items[0]?.first_name.value} ${data.items[0].last_name.value}`
       },
     };
   }

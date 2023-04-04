@@ -16,7 +16,7 @@ export const Homepage = ({ data,winner }: { data: IAuthorData[],winner:IAuthor }
   return <div className="mt-8 mb-8">
     <SectionTitle title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`} className="text-brandsDarkOrange"/>
     <Filter onChange={onFilterChange} states={filterState} onDisplayChange={onDisplayChange}/>
-    <BarsChart data={data}/>
+    <BarsChart data={data} type={filterState.type.value}/>
     {winner.numberOfBlogPosts > 0 && <Winner winner={winner} className="mt-10"/>}
   </div>
 };
