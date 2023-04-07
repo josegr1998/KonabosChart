@@ -25,7 +25,7 @@ export const BarsChart = ({
   const router = useRouter();
 
   const handler = (e) => {
-    const slug = e.activePayload[0].payload.slug;
+    const slug = e?.activePayload[0].payload.slug;
 
     router.push(`/latest/${slug}`);
   };
@@ -42,6 +42,7 @@ export const BarsChart = ({
     <Container>
       {data?.length ? (
         <div
+          className="custom-scrollbar"
           style={{ marginTop: "20px", overflowX: "auto" }}
         >
           <BarChart

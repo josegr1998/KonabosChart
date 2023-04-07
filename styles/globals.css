@@ -9,3 +9,26 @@ body{
     margin-right: 0px;
     padding: 0;
 }
+
+/* width */
+div.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height:10px;
+  cursor: pointer;
+}
+
+/* Track */
+div.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+div.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #54c4d5;
+}
+
+/* Handle on hover */
+div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #54c4d5;
+}
+
