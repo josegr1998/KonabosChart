@@ -49,8 +49,6 @@ export const getServerSideProps: GetServerSideProps<{
             })
         : [];
 
-        console.log('data.items',data.items[0])
-
     return {
       props: {
         data: parsedPosts.slice(0,6),

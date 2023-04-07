@@ -12,6 +12,8 @@ import { Container } from "../Container/Container";
 import { getChartWitdth } from "helpers/getChartWidth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { getTitleLabel } from "helpers/getTitleType";
+import { updateChartText } from "helpers/updateChartText";
 
 export const BarsChart = ({
   data,
@@ -29,21 +31,11 @@ export const BarsChart = ({
   };
 
   useEffect(() => {
-    const element = document.getElementsByClassName(
-      "recharts-legend-item-text"
-    );
-    if (element) {
-      element[0].innerHTML = `Number of ${type.endsWith('s') ? type : type + 's'}`;
-    }
+    updateChartText("recharts-legend-item-text", `Number of ${getTitleLabel(type)}`)
   }, [type]);
 
   const handlePopup = () => {
-    const popupElement = document.getElementsByClassName(
-      "recharts-tooltip-item-name"
-    );
-    if (popupElement?.length) {
-      popupElement[0].innerHTML = `Number of ${type.endsWith('s') ? type : type + 's'}`;
-    }
+    updateChartText("recharts-tooltip-item-value", `Number of ${getTitleLabel(type)}`)
   };
 
   return (

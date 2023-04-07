@@ -41,8 +41,17 @@ export const useFilters = () => {
 
     const selectedFilter = filterState[name];
 
+    const cleanedUpState = {} as IFilterState;
+
+    Object.keys(filterState).map((state)=>{
+      cleanedUpState[state] = {
+        ...filterState[state],
+        isOpen:false
+      }
+    })
+
     setFilterState({
-      ...filterState,
+      ...cleanedUpState,
       [name]:{
         ...selectedFilter,
         isOpen:!selectedFilter.isOpen

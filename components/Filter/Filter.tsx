@@ -21,7 +21,7 @@ export const Filter = ({
           Type
         </button>
         <div
-          className={`${states.type.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
+          className={`transform transition-all absolute ${states.type.isOpen ? 'scale-100' : 'scale-0'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
         mt-2 px-2`}
         >
           {filterFields.map(({value,label},index) => (
@@ -41,7 +41,7 @@ export const Filter = ({
           Date
         </button>
         <div
-          className={`${states.date.isOpen ? 'absolute' : 'hidden'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
+          className={`transform transition-all absolute ${states.date.isOpen ? 'scale-100' : 'scale-0'} w-32 h-32 border border-brandsPrimary z-20 bg-white rounded-md
         mt-2 px-2`}
         >
           {filterDates.map((field,index) => (
