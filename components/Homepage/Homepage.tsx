@@ -21,7 +21,7 @@ export const Homepage = ({ data,winner }: { data: IAuthorData[],winner:IAuthor }
     <Container>
       <div className="flex items-center justify-between">
         <Filter onChange={onFilterChange} states={filterState} onDisplayChange={onDisplayChange} />
-        <Tooltip/>
+        <Tooltip text={`Clicking on a person's bar will take you to their profile`}/>
       </div>
     </Container>
     <BarsChart data={data} type={filterState.type.value}/>
