@@ -13,11 +13,11 @@ export const Filter = ({
   onDisplayChange: (type: string) => void;
 }) => {
   return (
-    <Container>
-      <div className='max-w-7xl m-auto mb-8 flex justify-center mt-6 md:mt-0 md:justify-start gap-x-4'>
+    
+      <div className='max-w-7xl mb-8 flex justify-center mt-6 md:mt-0 md:justify-start gap-x-4'>
         <div className='relative'>
           <button
-            className='rounded-md border-2 p-1 px-2 w-36 border-brandsPrimaryDark'
+          className={`rounded-md border-2 p-1 px-2 w-36 border-brandsPrimaryDark hover:bg-gradient-to-bl from-brandsPrimaryLight via-brandsPrimaryDark to-brandsPrimaryLight hover:text-white transition-all hover:border-white hover:scale-110 ${states.type.isOpen && 'text-white scale-110 bg-gradient-to-bl border-white'}`}
             onClick={() => onDisplayChange("type")}
           >
             Type
@@ -37,7 +37,7 @@ export const Filter = ({
         </div>
         <div className='relative'>
           <button
-            className='rounded-md border-2 p-1 px-2 w-36 border-brandsPrimaryDark'
+          className={`rounded-md border-2 p-1 px-2 w-36 border-brandsPrimaryDark hover:bg-gradient-to-bl from-brandsPrimaryLight via-brandsPrimaryDark to-brandsPrimaryLight hover:text-white transition-all hover:border-white hover:scale-110 ${states.date.isOpen && 'text-white scale-110 bg-gradient-to-bl border-white'}`}
             onClick={() => onDisplayChange("date")}
           >
             Starting Date
@@ -56,6 +56,6 @@ export const Filter = ({
           </div>
         </div>
       </div>
-    </Container>
+   
   );
 };

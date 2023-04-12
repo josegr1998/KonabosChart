@@ -32,10 +32,11 @@ export const BarsChart = ({
 
   useEffect(() => {
     updateChartText("recharts-legend-item-text", `Number of ${getTitleLabel(type)}`)
+    updateChartText("recharts-tooltip-item-name", `Number of ${getTitleLabel(type)}`)
   }, [type]);
 
   const handlePopup = () => {
-    updateChartText("recharts-tooltip-item-value", `Number of ${getTitleLabel(type)}`)
+    updateChartText("recharts-tooltip-item-name", `Number of ${getTitleLabel(type)}`)
   };
 
   return (
