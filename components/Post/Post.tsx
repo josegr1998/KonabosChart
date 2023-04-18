@@ -1,7 +1,6 @@
 import { IPostData } from "@/interfaces/app/IPostData";
 
 export const Post = ({ data }: { data: IPostData }) => {
-  console.log("data", data);
 
   const postUrl = `https://konabos.com/${data.type}/${data.slug}`;
 
