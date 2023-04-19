@@ -10,7 +10,7 @@ export const Post = ({ data }: { data: IPostData }) => {
     <div className='bg-gradient-to-br from-brandsPrimaryDark via-brandsPrimaryLight to-brandsPrimaryDark p-2 relative pb-16 hover:scale-105 transform transition-all'>
       <a href={postUrl} target='_blank' className="flex flex-col h-full">
         <div className="h-56 w-full">
-          <img src={data.hero.url} className="h-full w-full object-cover"></img>
+          <img src={data.hero?.url} className="h-full w-full object-cover"></img>
         </div>
         <div>
           <h2 className='my-4 text-xl font-bold capitalize'>{data.title}</h2>

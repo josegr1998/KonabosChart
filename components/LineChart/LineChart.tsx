@@ -18,7 +18,7 @@ export const LineChartComponent = ({
   className,
   authorName,
 }: {
-  data: IPostData[];
+  data: {itemsCount:number,date:string}[];
   className?: string;
   authorName: string;
 }) => {

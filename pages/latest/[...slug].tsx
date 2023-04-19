@@ -13,6 +13,9 @@ import { Container } from "@/components/Container/Container";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { useLineFilters } from "hooks/useLineFilters";
 import { useState } from "react";
+import { getPostsByYear } from "helpers/getPostsByYear";
+import { getPostsByMonth } from "helpers/getPostsByMonth";
+import { getPostsByYearDefault } from "helpers/getPostsByYearDefault";
 
 export default function Latest({
   data,
@@ -21,91 +24,48 @@ export default function Latest({
   data: IPostData[];
   authorName: string;
 }) {
-  const {filterState,onDisplayChange,onFilterChange} = useLineFilters();
+  const { filterState, onDisplayChange, onFilterChange } = useLineFilters();
 
-  let parsedPosts = []
+  let parsedPosts = [] as { date: string; itemsCount: number }[];
 
-  const years = [];
-  const months = []
   const reversedData = data.concat().reverse();
-  let index = 0;
 
 
-  const parsedItems = reversedData.reduce((acc, item) => {
+  if (filterState.date.value !== "All") {
+    const parsedItems = getPostsByYear(reversedData, filterState.date.value);
 
-    const year = item.date.split('/')[2].split(',')[0]
-    if (year === filterState.date.value) {
-      const parsedItem = {
-        date: item.date.split(',')[0],
-        itemsCount: index + 1,
-      };
-      index++;
-      acc.push(parsedItem);
-    }
-
-
-    return acc
-  }, []);
-
-  if(filterState.date.value !== "All"){
-
-    const parsedPostsByMonth = parsedItems.reduce((acc, item,index) => {
-
-      const month = item.date.split('/')[0]
-
-      if(!months.includes(month)){
-        const parsedItem = {
-          date: item.date.split(',')[0],
-          itemsCount: index + 1,
-        };
-        months.push(month)
-        acc.push(parsedItem);
-      }
-
-      return acc
-        
-
-    },[]);
+    const parsedPostsByMonth = getPostsByMonth(parsedItems);
 
     parsedPosts = parsedPostsByMonth;
+  } else {
+    const parsedPostsReversed = getPostsByYearDefault(reversedData);
 
-  }
-  else {
-
-    const parsedPostsReversed = reversedData.reduce((acc, item, index) => {
-
-      const year = item.date.split("/")[2].split(',')[0];
-
-      if (!years.includes(year)) {
-        const parsedItem = {
-          date: item.date.split(",")[0],
-          itemsCount: index + 1,
-        };
-        years.push(year)
-        acc.push(parsedItem);
-
-      }
-
-      return acc;
-    }, []);
-
-    parsedPosts = parsedPostsReversed
-
+    parsedPosts = parsedPostsReversed;
   }
 
-
-
+  
   return (
     <>
-      <Container className="mt-8">
+      <Container className='mt-8'>
         <>
-          <SectionTitle title={`${authorName.split(' ')[0].toUpperCase()} THROUGH THE YEARS`} className="text-brandsDarkOrange" />
-          <LineFilter onChange={onFilterChange} onDisplayChange={onDisplayChange} states={filterState}/>
-          <LineChartComponent
+          <SectionTitle
+            title={`${authorName
+              .split(" ")[0]
+              .toUpperCase()} THROUGH THE YEARS`}
+            className='text-brandsDarkOrange'
+          />
+          <LineFilter
+            onChange={onFilterChange}
+            onDisplayChange={onDisplayChange}
+            states={filterState}
+          />
+         {parsedPosts?.length > 0 ? <LineChartComponent
             data={parsedPosts}
             className=''
             authorName={authorName.split(" ")[0]}
-          />
+          /> : <div>
+            <h2 >Sorry, not results found</h2>
+            </div>}
         </>
       </Container>
       <LatestPosts data={data.slice(0, 6)} authorName={authorName} />

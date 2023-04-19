@@ -15,7 +15,7 @@ const LineFilter = ({onChange,onDisplayChange,states }: {
       className={`rounded-md border-2 p-1 px-2 w-36 border-brandsPrimaryDark hover:bg-gradient-to-bl from-brandsPrimaryLight via-brandsPrimaryDark to-brandsPrimaryLight hover:text-white transition-all hover:border-white hover:scale-110 ${states.date.isOpen && 'text-white scale-110 bg-gradient-to-bl border-white'}`}
       onClick={() => onDisplayChange("date")}
      >
-      Starting Date
+      Year
      </button>
      <div
       className={`transform transition-all absolute ${states.date.isOpen ? 'scale-100' : 'scale-0'} w-32 py-1 border border-brandsPrimary z-20 bg-white rounded-md
