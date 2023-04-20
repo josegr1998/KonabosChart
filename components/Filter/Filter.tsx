@@ -28,7 +28,7 @@ export const Filter = ({
           >
             {filterFields.map(({ value, label }, index) => (
               <div key={index}>
-                <button className='hover:text-brandsPrimary' onClick={() => onChange('type', value)}>
+                <button className={`${value === states.type.value ? 'text-brandsPrimary' : ''} hover:text-brandsPrimary`} onClick={() => onChange('type', value)}>
                   {label}
                 </button>
               </div>
@@ -48,7 +48,7 @@ export const Filter = ({
           >
             {filterDates.map((field, index) => (
               <div key={index}>
-                <button className='hover:text-brandsPrimary' onClick={() => onChange('date', field)}>
+                <button className={`${field === states.date.value ? 'text-brandsPrimary' : ''} hover:text-brandsPrimary`} onClick={() => onChange('date', field)}>
                   {field}
                 </button>
               </div>
