@@ -16,6 +16,7 @@ import { useState } from "react";
 import { getPostsByYear } from "helpers/getPostsByYear";
 import { getPostsByMonth } from "helpers/getPostsByMonth";
 import { getPostsByYearDefault } from "helpers/getPostsByYearDefault";
+import { NoResults } from "@/components/NoResults/NoResults";
 
 export default function Latest({
   data,
@@ -64,7 +65,7 @@ export default function Latest({
             className=''
             authorName={authorName.split(" ")[0]}
           /> : <div>
-            <h2 >Sorry, not results found</h2>
+              <NoResults />
             </div>}
         </>
       </Container>

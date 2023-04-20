@@ -1,0 +1,3 @@
+.noResultsImg{
+ filter:invert(78%) sepia(42%) saturate(754%) hue-rotate(150deg) brightness(90%) contrast(83%);
+}

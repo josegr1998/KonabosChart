@@ -23,7 +23,9 @@ export const useFilters = () => {
       query += `${state}=${filterState[state].value}&`;
     });
 
-    router.push(`?${query}`);
+    if(router.query.type !== filterState.type.value || router.query.date !== filterState.date.value){
+      router.push(`?${query}`);
+    }
   }, [filterState]);
 
   const onFilterChange = (name: string, value: string) => {

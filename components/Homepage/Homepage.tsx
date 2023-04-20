@@ -11,20 +11,59 @@ import { IAuthor } from "@/interfaces/app/IAuthor";
 import { Winner } from "../Winner/Winner";
 import { Container } from "../Container/Container";
 import { Tooltip } from "../Tooltip/Tooltip";
+import { NoResults } from "../NoResults/NoResults";
 
-export const Homepage = ({ data,winner }: { data: IAuthorData[],winner:IAuthor }) => {
+export const Homepage = ({
+  data,
+  winner,
+  isLoading,
+}: {
+  data: IAuthorData[];
+  winner: IAuthor;
+  isLoading: boolean;
+}) => {
+  const { filterState, onFilterChange, onDisplayChange } = useFilters();
 
-  const {filterState,onFilterChange,onDisplayChange} = useFilters();
-  
-  return <div className="mt-8 mb-8">
-    <SectionTitle title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`} className="text-brandsDarkOrange"/>
-    <Container>
-      <div className="flex items-center justify-between">
-        <Filter onChange={onFilterChange} states={filterState} onDisplayChange={onDisplayChange} />
-        <Tooltip text={`Clicking on a person's bar will take you to their profile`}/>
-      </div>
-    </Container>
-    <BarsChart data={data} type={filterState.type.value}/>
-    {winner.numberOfBlogPosts > 0 && <Winner winner={winner} className="mt-10" title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase() } AWARD`}/>}
-  </div>
+  return (
+    <div className='mt-8 mb-8'>
+      <SectionTitle
+        title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`}
+        className='text-brandsDarkOrange'
+      />
+      <Container>
+        <div className='flex items-center justify-between'>
+          <Filter
+            onChange={onFilterChange}
+            states={filterState}
+            onDisplayChange={onDisplayChange}
+          />
+          <Tooltip
+            text={`Clicking on a person's bar will take you to their profile`}
+          />
+        </div>
+      </Container>
+      {!isLoading && data.length > 0 && !data.includes(undefined) ? (
+        <>
+          <BarsChart data={data} type={filterState.type.value} />
+          {winner?.numberOfBlogPosts > 0 && (
+            <Winner
+              winner={winner}
+              className='mt-10'
+              title={`MOST ${getTitleLabel(
+                filterState.type.value
+              ).toUpperCase()} AWARD`}
+            />
+          )}
+        </>
+      ) : isLoading ? (
+        <>
+          <span className='loader'></span>
+        </>
+      ) : (
+        <Container>
+          <NoResults />
+        </Container>
+      )}
+    </div>
+  );
 };
