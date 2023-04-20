@@ -1,0 +1,7 @@
+.githubImg {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 10px;
+  filter: invert(78%) sepia(42%) saturate(754%) hue-rotate(150deg)
+    brightness(90%) contrast(83%);
+}
