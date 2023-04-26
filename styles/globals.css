@@ -37,7 +37,7 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   height: 90px;
   display: block;
   margin: 20px auto;
-  margin-top:15rem;
+  margin-top:5rem;
   position: relative;
   border-radius: 50% 50% 0 0;
   border-bottom: 10px solid #54c4d5;
@@ -103,4 +103,19 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-position: -36px -36px;
     background-size: 80px 80px;
   }
+}
+
+.swiper-button-next{
+  color:red !important
+}
+.swiper-button-prev{
+  color:red !important
+}
+
+.swiper-scrollbar-horizontal{
+  bottom: -2rem !important;
+}
+
+.swiper-scrollbar-drag{
+  background-color:#54c4d5 !important
 }

@@ -1,0 +1,3 @@
+.pageContent{
+ min-height: calc(100vh - 97.6px - 96px - 32px);
+}

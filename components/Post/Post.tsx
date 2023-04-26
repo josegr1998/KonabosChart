@@ -7,7 +7,7 @@ export const Post = ({ data }: { data: IPostData }) => {
   const formattedDate = data.date?.split(',')[0]
 
   return (
-    <div className='bg-gradient-to-br from-brandsPrimaryDark via-brandsPrimaryLight to-brandsPrimaryDark p-2 relative pb-16 hover:scale-105 transform transition-all'>
+    <div className='bg-gradient-to-br from-brandsPrimaryDark via-brandsPrimaryLight to-brandsPrimaryDark p-2 relative pb-16 transform transition-all'>
       <a href={postUrl} target='_blank' className="flex flex-col h-full">
         <div className="h-56 w-full">
           <img src={data.hero?.url} className="h-full w-full object-cover"></img>

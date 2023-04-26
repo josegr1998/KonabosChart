@@ -18,8 +18,8 @@ export const Winner = ({
           <img src={caricature.url} className='max-w-xs' />
         </div>
         <div>
-          <h2 className='text-center my-6 text-brandsPrimaryDark  md:my-0 md:text-white font-bold text-2xl'>{name} - {jobTitle}</h2>
-          <p dangerouslySetInnerHTML={{__html:experience}} className="text-lg mt-4"></p>
+          <h2 className='text-center my-6 text-brandsPrimaryDark  md:my-0 py-2 font-bold text-2xl bg-white rounded-md'>{name} - {jobTitle}</h2>
+          <p dangerouslySetInnerHTML={{__html:experience}} className="text-lg mt-4 bg-white rounded-md p-2"></p>
         </div>
       </div>
     </div>
