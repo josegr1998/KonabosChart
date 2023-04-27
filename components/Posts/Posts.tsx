@@ -34,8 +34,8 @@ export const Posts = ({ data }: { data: IPostData[] }) => {
           speed={1000}
         >
           {data.map((post, index) => (
-            <SwiperSlide>
-              <Post data={post} key={index} />
+            <SwiperSlide key={index}>
+              <Post data={post} />
             </SwiperSlide>
           ))}
           <div className="swiper-scrollbar"></div>
