@@ -28,7 +28,7 @@ export const Homepage = ({
     <div className='mt-8 mb-8'>
       <SectionTitle
         title={`MOST ${getTitleLabel(filterState.type.value).toUpperCase()}`}
-        className='text-brandsDarkOrange'
+        className='underline underline-offset-4 decoration-brandsPrimary'
       />
       <Container>
         <div className='flex items-center justify-between'>

@@ -53,7 +53,7 @@ export default function Latest({
             title={`${authorName
               .split(" ")[0]
               .toUpperCase()} THROUGH THE YEARS`}
-            className='text-brandsDarkOrange'
+            className='underline underline-offset-4 decoration-brandsPrimary'
           />
           <LineFilter
             onChange={onFilterChange}

@@ -10,7 +10,7 @@ export const LatestPosts = ({
   authorName: string;
 }) => (
   <div className="mb-24">
-    <SectionTitle title={`LATEST FROM ${authorName.toUpperCase()}`} className="text-brandsDarkOrange my-8"/>
+    <SectionTitle title={`LATEST FROM ${authorName.toUpperCase()}`} className="underline underline-offset-4 decoration-brandsPrimary my-16"/>
     <Posts data={data} />
   </div>
 );
