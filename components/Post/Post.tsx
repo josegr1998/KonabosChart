@@ -19,8 +19,8 @@ export const Post = ({ data }: { data: IPostData }) => {
           <p>{data.description}</p>
         </div>
       </a>
-      <div className='absolute bottom-0 left-0 bg-brandsDarkOrange text-white p-3 font-bold'>
-        <p>{formattedDate}</p>
+      <div className='absolute -bottom-2 -left-2 bg-brandsDarkOrange text-white p-3 font-bold rounded-md'>
+        <p>{formattedDate.replaceAll('/',' - ')}</p>
       </div>
     </div>
 
