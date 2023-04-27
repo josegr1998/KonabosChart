@@ -60,11 +60,13 @@ export default function Latest({
             onDisplayChange={onDisplayChange}
             states={filterState}
           />
-         {parsedPosts?.length > 0 ? <LineChartComponent
-            data={parsedPosts}
-            className=''
-            authorName={authorName.split(" ")[0]}
-          /> : <div>
+         {parsedPosts?.length > 0 ? <div className="overflow-x-auto">
+            <LineChartComponent
+              data={parsedPosts}
+              className=''
+              authorName={authorName.split(" ")[0]}
+            />
+          </div> : <div>
               <NoResults />
             </div>}
         </>
