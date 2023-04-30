@@ -1,3 +1,4 @@
+'use client'
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import {
   Bar,
