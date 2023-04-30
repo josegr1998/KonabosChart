@@ -10,10 +10,10 @@ import {
 } from "recharts";
 import { Container } from "../Container/Container";
 import { getChartWitdth } from "helpers/getChartWidth";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { getTitleLabel } from "helpers/getTitleType";
 import { updateChartText } from "helpers/updateChartText";
+import { useRouter } from "next/navigation";
 
 export const BarsChart = ({
   data,

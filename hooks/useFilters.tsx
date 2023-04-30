@@ -1,17 +1,18 @@
 import { IFilterState } from "@/components/Filter/IFIlterState";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 export const useFilters = () => {
-  const router = useRouter();
+   const router = useRouter();
+   const searchParams = useSearchParams();
 
   const [filterState, setFilterState] = useState<IFilterState>({
     type: {
-      value: (router?.query?.type as string) ?? "All",
+      value:  searchParams.get('type') ?? "All",
       isOpen:false
     },
     date: {
-      value: (router?.query?.date as string) ?? "All",
+      value: searchParams.get('date') ?? "All",
       isOpen:false
     }
   });
@@ -23,7 +24,7 @@ export const useFilters = () => {
       query += `${state}=${filterState[state].value}&`;
     });
 
-    if(router.query.type !== filterState.type.value || router.query.date !== filterState.date.value){
+    if (searchParams.get('type') !== filterState.type.value || searchParams.get('date') !== filterState.date.value){
       router.push(`?${query}`);
     }
   }, [filterState]);

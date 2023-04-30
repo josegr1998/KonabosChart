@@ -6,6 +6,9 @@ const nextConfig = {
     PROJECT_ID: process.env.PROJECT_ID,
     DELIVERY_API_KEY: process.env.DELIVERY_API_KEY,
   },
+  experimental: {
+    appDir: true,
+  },
 };
 
 module.exports = nextConfig

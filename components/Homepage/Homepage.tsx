@@ -1,3 +1,4 @@
+'use client';
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { getTitleLabel } from "helpers/getTitleType";
 import { useRouter } from "next/router";
@@ -12,16 +13,10 @@ import { Winner } from "../Winner/Winner";
 import { Container } from "../Container/Container";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { NoResults } from "../NoResults/NoResults";
+import { useHomepageData } from "hooks/useHomepageData";
 
-export const Homepage = ({
-  data,
-  winner,
-  isLoading,
-}: {
-  data: IAuthorData[];
-  winner: IAuthor;
-  isLoading: boolean;
-}) => {
+export const Homepage = () => {
+  const { authorsData, winner, isLoading } = useHomepageData()
   const { filterState, onFilterChange, onDisplayChange } = useFilters();
 
   return (
@@ -42,9 +37,9 @@ export const Homepage = ({
           />
         </div>
       </Container>
-      {!isLoading && data.length > 0 && !data.includes(undefined) ? (
+      {!isLoading && authorsData.length > 0 && !authorsData.includes(undefined) ? (
         <>
-          <BarsChart data={data} type={filterState.type.value} />
+          <BarsChart data={authorsData} type={filterState.type.value} />
           {winner?.numberOfBlogPosts > 0 && (
             <Winner
               winner={winner}

@@ -4,9 +4,10 @@ import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { IKenticoBlog } from "@/interfaces/kentico/IKenticoBlog";
 import { KenticoHttpRequest } from "clients/KenticoHttpRequest";
 import { getAuthorsCount } from "helpers/getAuthorsCount";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { KenticoParse } from "parsers/KenticoParse";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export const useHomepageData = (): {
   winner: IAuthor;
@@ -17,13 +18,15 @@ export const useHomepageData = (): {
 
   const kenticoPrase = new KenticoParse();
 
-  const router = useRouter();
+   const router = useRouter();
+  const searchParams = useSearchParams();
+  console.log('searchParams',searchParams.values())
 
   const [authorsData, setAuthorsData] = useState<IAuthorData[]>([]);
   const [winner, setWinner] = useState<IAuthor>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const contentType = router.query?.type;
+  const contentType = searchParams.get('type');
 
   let type = [];
 
@@ -35,7 +38,9 @@ export const useHomepageData = (): {
 
   const getData = async () => {
     const contentDate =
-      router.query?.date === "All" ? "2015" : (router.query?.date as string);
+      searchParams.get("date") === "All"
+        ? "2015"
+        : (searchParams.get("date") as string);
     setIsLoading(true);
     const data = await kenticoHttpRequest.getData<IITems<IKenticoBlog>>(type);
 
@@ -83,10 +88,10 @@ export const useHomepageData = (): {
   };
 
   useEffect(() => {
-   if(router.query.type && router.query.date){
-    getData();
-   }
-  }, [router.query]);
+    if (searchParams.get("type") && searchParams.get("date")) {
+      getData();
+    }
+  }, [searchParams]);
 
   return { winner, authorsData, isLoading };
 };

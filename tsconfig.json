@@ -2,12 +2,22 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/api/*": ["api/*"],
-      "@/components/*": ["components/*"],
-      "@/interfaces/*": ["interfaces/*"]
+      "@/api/*": [
+        "api/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/interfaces/*": [
+        "interfaces/*"
+      ]
     },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -31,14 +41,27 @@
     "sourceMap": true,
     "strictPropertyInitialization": false, //should be true
     "suppressImplicitAnyIndexErrors": false //should be true
+    ,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "exclude": ["node_modules", ".next", "out", "_next"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "_next"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     "next.config.js",
-    "plopfile.mjs"
-, "components/BarsChart.jsx"  ]
+    "plopfile.mjs",
+    "components/BarsChart.jsx",
+    ".next/types/**/*.ts"
+  ]
 }
