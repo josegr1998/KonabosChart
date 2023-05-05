@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kentico/kontent-delivery": "^10.4.1",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "18.15.9",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
@@ -18,6 +19,7 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "recharts": "^2.5.0",
     "swiper": "^9.2.4",
     "typescript": "5.0.2"
