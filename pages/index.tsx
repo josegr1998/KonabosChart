@@ -1,18 +1,25 @@
 import { Homepage } from "@/components/Homepage/Homepage";
 import { useHomepageData } from "hooks/useHomepageData";
-import { useAppSelector } from "redux/hooks";
+import { useEffect } from "react";
+import { setAuthorsData, setWinner } from "redux/features/authorsSlice";
+import { useAppDispatch } from "redux/hooks";
 
 
 export default function Home() {
 
   const {authorsData,winner,isLoading} = useHomepageData();
 
-  const authors = useAppSelector(state => state.barCharReducer.authors);
+  const dispatch = useAppDispatch();
+ 
+  useEffect(()=>{
 
-  console.log("authors",authors)
+    dispatch(setAuthorsData(authorsData));
+    dispatch(setWinner(winner))
+
+  },[authorsData])
 
 
   return <>
-    {<Homepage data={authorsData} winner={winner} isLoading={isLoading}/>}
+    {<Homepage isLoading={isLoading}/>}
   </>;
 }

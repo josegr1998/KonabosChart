@@ -12,17 +12,16 @@ import { Winner } from "../Winner/Winner";
 import { Container } from "../Container/Container";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { NoResults } from "../NoResults/NoResults";
+import { useAppSelector } from "redux/hooks";
 
 export const Homepage = ({
-  data,
-  winner,
   isLoading,
 }: {
-  data: IAuthorData[];
-  winner: IAuthor;
   isLoading: boolean;
 }) => {
   const { filterState, onFilterChange, onDisplayChange } = useFilters();
+
+  const authors = useAppSelector((state) => state.authorsSlice.authors);
 
   return (
     <div className='mt-8 mb-8'>
@@ -42,18 +41,16 @@ export const Homepage = ({
           />
         </div>
       </Container>
-      {!isLoading && data.length > 0 && !data.includes(undefined) ? (
+      {!isLoading && authors.length > 0 && !authors.includes(undefined) ? (
         <>
-          <BarsChart data={data} type={filterState.type.value} />
-          {winner?.numberOfBlogPosts > 0 && (
-            <Winner
-              winner={winner}
-              className='mt-10'
-              title={`MOST ${getTitleLabel(
-                filterState.type.value
-              ).toUpperCase()} AWARD`}
-            />
-          )}
+          <BarsChart data={authors} type={filterState.type.value} />
+
+          <Winner
+            className='mt-10'
+            title={`MOST ${getTitleLabel(
+              filterState.type.value
+            ).toUpperCase()} AWARD`}
+          />
         </>
       ) : isLoading ? (
         <>

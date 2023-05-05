@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import barCharReducer from "./features/barChartSlice";
+import authorsSlice from "./features/authorsSlice";
 
 export const store = configureStore({
   reducer: {
-    barCharReducer,
+    authorsSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
