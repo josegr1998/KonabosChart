@@ -11,11 +11,11 @@ export class KenticoParse extends KenticoBaseParser {
         author?.last_name
       )}`,
       caricature: {
-        url: author.caricature.value[0].url,
+        url: author?.caricature?.value[0]?.url,
       },
-      experience: author.experience.rawData.value,
-      jobTitle: author.job_title.value,
-      slug:this.valueParse(author.slug) as string
+      experience: author?.experience?.rawData?.value,
+      jobTitle: author?.job_title.value,
+      slug:this.valueParse(author?.slug) as string
     };
 
     return authorPased;
@@ -23,12 +23,14 @@ export class KenticoParse extends KenticoBaseParser {
 
   postParse(post: IKenticoBlog): IPostData {
     return {
-      date: this.valueParse(post.date)?.toLocaleString() ?? null,
-      title: this.valueParse(post.title) as string ?? null,
-      hero: post.hero ? { url: post.hero.value[0].url, alt: null } : null,
-      description: this.valueParse(post.metadata__meta_description) as string ?? null,
-      type: post.system.type,
-      slug: this.valueParse(post.slug) as string ?? null,
+      date: this.valueParse(post?.date)?.toLocaleString() ?? null,
+      title: (this.valueParse(post?.title) as string) ?? null,
+      hero: post?.hero ? { url: post?.hero?.value[0]?.url, alt: null } : null,
+      description:
+        (this.valueParse(post.metadata__meta_description) as string) ?? null,
+      type: post?.system?.type,
+      slug: (this.valueParse(post?.slug) as string) ?? null,
+      author: this.authorParse(post.author.value[0])
     };
   }
 }

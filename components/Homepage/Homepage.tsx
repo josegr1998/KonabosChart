@@ -1,18 +1,17 @@
 import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { getTitleLabel } from "helpers/getTitleType";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { BarsChart } from "../BarsChart/BarsChart";
 import { Filter } from "../Filter/Filter";
 import { SectionTitle } from "../SectionTitle/SectionTitle";
-import { IFilterState } from "../Filter/IFIlterState";
 import { useFilters } from "hooks/useFilters";
 import { IAuthor } from "@/interfaces/app/IAuthor";
 import { Winner } from "../Winner/Winner";
 import { Container } from "../Container/Container";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { NoResults } from "../NoResults/NoResults";
-
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import UsersTable from "../UsersTable/UsersTable";
 export const Homepage = ({
   data,
   winner,
@@ -54,6 +53,12 @@ export const Homepage = ({
               ).toUpperCase()} AWARD`}
             />
           )}
+          <div
+            className={`ag-theme-alpine mx-auto mt-4`}
+            style={{ height: 500, width: '80%',maxWidth:1200 }}
+          >
+          <UsersTable/>
+          </div>
         </>
       ) : isLoading ? (
         <>
