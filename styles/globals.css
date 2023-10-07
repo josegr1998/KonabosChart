@@ -1,20 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap');
-body{
-    margin-top: 0px; 
-    margin-bottom: 0px; 
-    margin-left: 0px; 
-    margin-right: 0px;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap");
+body {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 /* width */
 div.custom-scrollbar::-webkit-scrollbar {
   width: 10px;
-  height:10px;
+  height: 10px;
   cursor: pointer;
 }
 
@@ -32,25 +32,54 @@ div.custom-scrollbar::-webkit-scrollbar-thumb {
 div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #54c4d5;
 }
+
+.ag-body-horizontal-scroll-viewport::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+.ag-body-vertical-scroll-viewport::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+/* Track */
+.ag-body-horizontal-scroll-viewport, .ag-body-vertical-scroll-viewport::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.ag-body-horizontal-scroll-viewport, .ag-body-vertical-scroll-viewport::-webkit-scrollbar-thumb {
+  background: #54c4d5;
+}
+
+
 .loader {
   width: 32px;
   height: 90px;
   display: block;
   margin: 20px auto;
-  margin-top:5rem;
+  margin-top: 5rem;
   position: relative;
   border-radius: 50% 50% 0 0;
   border-bottom: 10px solid #54c4d5;
-  background-color: #FFF;
-  background-image: radial-gradient(ellipse at center, #FFF 34%, #54c4d5 35%, #54c4d5 54%, #FFF 55%), linear-gradient(#54c4d5 10px, transparent 0);
+  background-color: #fff;
+  background-image: radial-gradient(
+      ellipse at center,
+      #fff 34%,
+      #54c4d5 35%,
+      #54c4d5 54%,
+      #fff 55%
+    ),
+    linear-gradient(#54c4d5 10px, transparent 0);
   background-size: 28px 28px;
-  background-position: center 20px , center 2px;
+  background-position: center 20px, center 2px;
   background-repeat: no-repeat;
   box-sizing: border-box;
   animation: animloaderBack 1s linear infinite alternate;
 }
 .loader::before {
-  content: '';  
+  content: "";
   box-sizing: border-box;
   position: absolute;
   left: 50%;
@@ -62,14 +91,19 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   top: 67px;
 }
 .loader::after {
-  content: '';  
+  content: "";
   position: absolute;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
   width: 34px;
   height: 34px;
   top: 112%;
-  background: radial-gradient(ellipse at center, #ffdf00 8%, #54c4d5 24%, rgba(0, 0, 0, 0) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    #ffdf00 8%,
+    #54c4d5 24%,
+    rgba(0, 0, 0, 0) 100%
+  );
   border-radius: 50% 50% 0;
   background-repeat: no-repeat;
   background-position: -44px -44px;
@@ -80,10 +114,14 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes animloaderBack {
-  0%, 30%, 70% {
+  0%,
+  30%,
+  70% {
     transform: translateY(0px);
   }
-  20%, 40%, 100% {
+  20%,
+  40%,
+  100% {
     transform: translateY(-5px);
   }
 }
@@ -105,27 +143,28 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   }
 }
 
-.swiper-button-next{
-  color:red !important
+.swiper-button-next {
+  color: red !important;
 }
-.swiper-button-prev{
-  color:red !important
+.swiper-button-prev {
+  color: red !important;
 }
 
-.swiper-scrollbar-horizontal{
+.swiper-scrollbar-horizontal {
   bottom: -2rem !important;
 }
 
-.swiper-scrollbar-drag{
-  background-color:#54c4d5 !important
+.swiper-scrollbar-drag {
+  background-color: #54c4d5 !important;
 }
 
-.ag-header-row-column{
- background-color: #54c4d5 !important;
- color:white !important;
- font-size: 1rem !important;
+.ag-header {
+  background-color: #54c4d5 !important;
+  font-size: 1rem !important;
 }
-
+.ag-header-row-column {
+  color: white !important;
+}
 
 /* Table loader*/
 
@@ -135,7 +174,7 @@ div.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   width: 80px;
   height: 80px;
   margin: 0 auto;
-  margin-top:12rem
+  margin-top: 12rem;
 }
 .lds-ellipsis div {
   position: absolute;

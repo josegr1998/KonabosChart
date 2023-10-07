@@ -14,12 +14,12 @@ export const useTableData = () => {
   const [isLoading,setIsLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [columns] = useState([
-    { field: "name" },
-    { field: "Total Posts" },
-    { field: "Number Of Blogs" },
-    { field: "Number Of Videos" },
-    { field: "Number Of Podcasts" },
-    { field: "Number Of News" },
+    { field: "name", rowDrag: true,sortable:true },
+    { field: "Total Posts", sortable: true },
+    { field: "Number Of Blogs", sortable: true },
+    { field: "Number Of Videos", sortable: true },
+    { field: "Number Of Podcasts", sortable: true },
+    { field: "Number Of News", sortable: true },
   ]);
 
   const getPostsByAuthor = async () => {
