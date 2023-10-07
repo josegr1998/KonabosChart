@@ -22,6 +22,7 @@ const UsersTable = () => {
           scrollbarWidth={10}
           rowDragManaged={true}
           animateRows={true}
+          className="pb-12"
         ></AgGridReact>
        </>
       )}
