@@ -25,7 +25,7 @@ export class KenticoParse extends KenticoBaseParser {
     return {
       date: this.valueParse(post?.date)?.toLocaleString() ?? null,
       title: (this.valueParse(post?.title) as string) ?? null,
-      hero: post?.hero ? { url: post?.hero?.value[0]?.url, alt: null } : null,
+      hero: post?.hero ? { url: post?.hero?.value[0]?.url ?? null, alt: null } : null,
       description:
         (this.valueParse(post.metadata__meta_description) as string) ?? null,
       type: post?.system?.type,

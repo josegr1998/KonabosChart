@@ -9,7 +9,7 @@ export const Post = ({ data }: { data: IPostData }) => {
 
   return (
     <div className='bg-gradient-to-br from-brandsPrimaryDark via-brandsPrimaryLight to-brandsPrimaryDark p-2 relative pb-16 transform transition-all h-96'
-    style={{backgroundImage: `url(${data.hero?.url})`,backgroundPosition:'center',objectFit:'cover'}}
+    style={{backgroundImage: `url(${data?.hero?.url})`,backgroundPosition:'center',objectFit:'cover'}}
     >
       <a href={postUrl} target='_blank' className="flex flex-col absolute
        w-4/5 h-1/2 bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2

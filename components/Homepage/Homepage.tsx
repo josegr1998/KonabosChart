@@ -52,13 +52,7 @@ export const Homepage = ({
                 filterState.type.value
               ).toUpperCase()} AWARD`}
             />
-          )}
-          <div
-            className={`ag-theme-alpine mx-auto mt-4`}
-            style={{ height: 500, width: '80%',maxWidth:1200 }}
-          >
-          <UsersTable/>
-          </div>
+          )}       
         </>
       ) : isLoading ? (
         <>
@@ -69,6 +63,7 @@ export const Homepage = ({
           <NoResults />
         </Container>
       )}
+      <UsersTable />
     </div>
   );
 };

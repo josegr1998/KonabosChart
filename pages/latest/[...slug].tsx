@@ -44,6 +44,8 @@ export default function Latest({
     parsedPosts = parsedPostsReversed;
   }
 
+  const postsWithDescription = data.filter((post) => post.description)
+
   
   return (
     <>
@@ -71,7 +73,7 @@ export default function Latest({
             </div>}
         </>
       </Container>
-      <LatestPosts data={data.slice(0, 6)} authorName={authorName} />
+      <LatestPosts data={postsWithDescription.slice(0, 6)} authorName={authorName} />
     </>
   );
 }

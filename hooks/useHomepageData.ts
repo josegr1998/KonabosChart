@@ -53,7 +53,7 @@ export const useHomepageData = (): {
           return kenticoPrase.authorParse(item.author.value[0]);
         }
       })
-      .filter((x) => x && x.name !== "Konabos Inc.");
+      .filter((x) => x);
 
     const authorsData = getAuthorsCount(authors);
 
