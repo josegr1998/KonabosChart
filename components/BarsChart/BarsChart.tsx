@@ -1,4 +1,3 @@
-import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import {
   Bar,
   BarChart,
@@ -16,11 +15,11 @@ import { getTitleLabel } from "helpers/getTitleType";
 import { updateChartText } from "helpers/updateChartText";
 
 export const BarsChart = ({
-  data,
   type,
+  barsChartData,
 }: {
-  data: IAuthorData[];
   type: string;
+  barsChartData: any;
 }) => {
   const router = useRouter();
 
@@ -31,33 +30,41 @@ export const BarsChart = ({
   };
 
   useEffect(() => {
-    updateChartText("recharts-legend-item-text", `Number of ${getTitleLabel(type)}`)
-    updateChartText("recharts-tooltip-item-name", `Number of ${getTitleLabel(type)}`)
+    updateChartText(
+      "recharts-legend-item-text",
+      `Number of ${getTitleLabel(type)}`
+    );
+    updateChartText(
+      "recharts-tooltip-item-name",
+      `Number of ${getTitleLabel(type)}`
+    );
   }, [type]);
 
   const handlePopup = () => {
-    updateChartText("recharts-tooltip-item-name", `Number of ${getTitleLabel(type)}`)
+    updateChartText(
+      "recharts-tooltip-item-name",
+      `Number of ${getTitleLabel(type)}`
+    );
   };
 
   return (
     <Container>
-      {data?.length ? (
+      {barsChartData?.length ? (
         <div
-          className="custom-scrollbar"
+          className='custom-scrollbar'
           style={{ marginTop: "20px", overflowX: "auto" }}
         >
           <BarChart
-            width={getChartWitdth(data?.length)}
+            width={getChartWitdth(barsChartData?.length)}
             height={250}
-            data={data}
+            data={barsChartData}
             barSize={250}
-            style={{ margin: "0 auto",cursor:'pointer' }}
+            style={{ margin: "0 auto", cursor: "pointer" }}
             onClick={(e) => handler(e)}
             barGap={15}
             barCategoryGap={15}
             defaultShowTooltip={false}
             onMouseMove={() => handlePopup()}
-
           >
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='name'></XAxis>

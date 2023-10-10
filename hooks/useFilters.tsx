@@ -1,71 +1,88 @@
 import { IFilterState } from "@/components/Filter/IFIlterState";
+import { IAuthorData } from "@/interfaces/app/IAuthorData";
 import { useRouter } from "next/router";
 import { use, useEffect, useState } from "react";
 
-export const useFilters = () => {
+export const useFilters = (data: IAuthorData[]) => {
   const router = useRouter();
 
   const [filterState, setFilterState] = useState<IFilterState>({
     type: {
-      value: (router?.query?.type as string) ?? "All",
-      isOpen:false
+      value: null,
+      isOpen: false,
     },
     date: {
-      value: (router?.query?.date as string) ?? "All",
-      isOpen:false
-    }
+      value: null,
+      isOpen: false,
+    },
   });
 
   useEffect(() => {
     let query: string = "";
 
     Object.keys(filterState).map((state) => {
-      query += `${state}=${filterState[state].value}&`;
+      if (filterState[state].value)
+        query += `${state}=${filterState[state].value}&`;
     });
 
-    if(router.query.type !== filterState.type.value || router.query.date !== filterState.date.value){
+    if (filterState.date.value || filterState.type.value) {
       router.push(`?${query}`);
     }
   }, [filterState]);
 
+  useEffect(() => {
+    if (router.query?.type)
+      setFilterState({
+        ...filterState,
+        type: {
+          ...filterState.type,
+          value: (router?.query?.type as string) ?? null,
+        },
+      });
+    if (router.query?.date)
+      setFilterState({
+        ...filterState,
+        date: {
+          ...filterState.date,
+          value: (router?.query?.date as string) ?? null,
+        },
+      });
+  }, []);
+
   const onFilterChange = (name: string, value: string) => {
-    
     setFilterState({
       ...filterState,
       [name]: {
-        isOpen:false,
-        value
+        isOpen: false,
+        value,
       },
     });
   };
 
-  const onDisplayChange = (name:string)=>{
-
+  const onDisplayChange = (name: string) => {
     const selectedFilter = filterState[name];
 
     const cleanedUpState = {} as IFilterState;
 
-    Object.keys(filterState).map((state)=>{
+    Object.keys(filterState).map((state) => {
       cleanedUpState[state] = {
         ...filterState[state],
-        isOpen:false
-      }
-    })
+        isOpen: false,
+      };
+    });
 
     setFilterState({
       ...cleanedUpState,
-      [name]:{
+      [name]: {
         ...selectedFilter,
-        isOpen:!selectedFilter.isOpen
-      }
-    })
-
-  }
+        isOpen: !selectedFilter.isOpen,
+      },
+    });
+  };
 
   return {
-   onFilterChange,
-   filterState,
-   onDisplayChange
-  }
-
+    onFilterChange,
+    filterState,
+    onDisplayChange,
+  };
 };

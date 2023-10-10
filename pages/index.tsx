@@ -1,13 +1,19 @@
 import { Homepage } from "@/components/Homepage/Homepage";
-import { useHomepageData } from "hooks/useHomepageData";
-
+import {
+  usePosts,
+} from "@/components/Homepage/hooks";
 
 export default function Home() {
+  const { allPosts, isLoading } = usePosts();
 
-  const {authorsData,winner,isLoading} = useHomepageData()
-
-
-  return <>
-    {<Homepage data={authorsData} winner={winner} isLoading={isLoading}/>}
-  </>;
+  return (
+    <>
+      {
+        <Homepage
+          isLoading={isLoading}
+          posts={allPosts}
+        />
+      }
+    </>
+  );
 }

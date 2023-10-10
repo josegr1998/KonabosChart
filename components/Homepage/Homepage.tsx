@@ -1,10 +1,9 @@
-import { IAuthorData } from "@/interfaces/app/IAuthorData";
+
 import { getTitleLabel } from "helpers/getTitleType";
 import { BarsChart } from "../BarsChart/BarsChart";
 import { Filter } from "../Filter/Filter";
 import { SectionTitle } from "../SectionTitle/SectionTitle";
 import { useFilters } from "hooks/useFilters";
-import { IAuthor } from "@/interfaces/app/IAuthor";
 import { Winner } from "../Winner/Winner";
 import { Container } from "../Container/Container";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -12,16 +11,24 @@ import { NoResults } from "../NoResults/NoResults";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import UsersTable from "../UsersTable/UsersTable";
+import { IITems } from "@/interfaces/IItems";
+import { IKenticoBlog } from "@/interfaces/kentico/IKenticoBlog";
+import { useBarsChartData, useTableData, useWinner } from "./hooks";
 export const Homepage = ({
-  data,
-  winner,
   isLoading,
+  posts,
 }: {
-  data: IAuthorData[];
-  winner: IAuthor;
   isLoading: boolean;
+  posts: IITems<IKenticoBlog>;
 }) => {
-  const { filterState, onFilterChange, onDisplayChange } = useFilters();
+  const { barsChartData } = useBarsChartData(posts?.items);
+
+  const { filterState, onFilterChange, onDisplayChange } =
+    useFilters(barsChartData);
+
+  const { winner } = useWinner(barsChartData);
+
+  const { columns, rows } = useTableData(posts?.items);
 
   return (
     <div className='mt-8 mb-8'>
@@ -41,9 +48,12 @@ export const Homepage = ({
           />
         </div>
       </Container>
-      {!isLoading && data.length > 0 && !data.includes(undefined) ? (
+      {!isLoading && posts?.items.length > 0 ? (
         <>
-          <BarsChart data={data} type={filterState.type.value} />
+          <BarsChart
+            barsChartData={barsChartData}
+            type={filterState.type.value}
+          />
           {winner?.numberOfBlogPosts > 0 && (
             <Winner
               winner={winner}
@@ -52,7 +62,8 @@ export const Homepage = ({
                 filterState.type.value
               ).toUpperCase()} AWARD`}
             />
-          )}       
+          )}
+          <UsersTable columns={columns} rows={rows} />
         </>
       ) : isLoading ? (
         <>
@@ -63,7 +74,6 @@ export const Homepage = ({
           <NoResults />
         </Container>
       )}
-      <UsersTable />
     </div>
   );
 };
