@@ -11,22 +11,28 @@ type Props = {
 const UsersTable = ({ columns, rows }: Props) => {
   return (
     <>
-      <div className='flex justify-end mb-4'>
-        <Tooltip text={"You can click on a column header to sort the rows"} />
-      </div>
-      <div
-        className={`ag-theme-alpine mx-auto mt-4`}
-        style={{ height: 500, width: "80%", maxWidth: 1200 }}
-      >
-        <AgGridReact
-          rowData={rows}
-          columnDefs={columns as any}
-          scrollbarWidth={10}
-          rowDragManaged={true}
-          animateRows={true}
-          className='pb-12'
-        ></AgGridReact>
-      </div>
+      {columns?.length > 0 && rows?.length > 0 && (
+        <div>
+          <div className='flex justify-end mb-4'>
+            <Tooltip
+              text={"You can click on a column header to sort the rows"}
+            />
+          </div>
+          <div
+            className={`ag-theme-alpine mx-auto mt-4`}
+            style={{ height: 500, width: "80%", maxWidth: 1200 }}
+          >
+            <AgGridReact
+              rowData={rows}
+              columnDefs={columns as any}
+              scrollbarWidth={10}
+              rowDragManaged={true}
+              animateRows={true}
+              className='pb-12'
+            ></AgGridReact>
+          </div>
+        </div>
+      )}
     </>
   );
 };
