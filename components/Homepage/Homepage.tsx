@@ -50,8 +50,8 @@ export const Homepage = () => {
         query = query += `${key}=${filters[key].value}&`;
       }
     }
-    query && router.push(`?${query}`);
-  }, [filters]);
+    query && router.replace(`?${query}`, undefined, { shallow: true });;
+  }, [filters.date.value, filters.type.value]);
 
 
   return (

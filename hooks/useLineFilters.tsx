@@ -19,7 +19,7 @@ export const useLineFilters = () => {
    query += `${state}=${filterState[state].value}&`;
   });
 
-  router.push(`${router.query.slug}?${query}`);
+  router.replace(`${router.query.slug}?${query}`, undefined, { shallow: true })
  }, [filterState]);
 
  const onFilterChange = (name: string, value: string) => {
