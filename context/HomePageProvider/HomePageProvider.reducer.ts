@@ -50,6 +50,9 @@ export const reducer = (
     case "START_LOADING": {
       return { ...state, isLoading: true };
     }
+    case "STOP_LOADING": {
+      return { ...state, isLoading: false };
+    }
     case "SET_HOMEPAGE_DATA": {
       const payload = action.payload as IITems<IKenticoBlog>;
       const filters = router.query as { type: string; date: string };

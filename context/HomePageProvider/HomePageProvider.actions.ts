@@ -6,6 +6,7 @@ export enum ActionTypes {
   SET_HOMEPAGE_DATA = "SET_HOMEPAGE_DATA",
   FILTER_HOMEPAGE_DATA = "FILTER_HOMEPAGE_DATA",
   OPEN_FILTER_MODAL = "OPEN_FILTER_MODAL",
+  STOP_LOADING = "STOP_LOADING",
 }
 
 export const startLoadingAction = () => {
@@ -14,6 +15,14 @@ export const startLoadingAction = () => {
     payload: null,
   };
 };
+
+export const stopLoadingAction = () => {
+  return {
+    type: ActionTypes.STOP_LOADING,
+    payload:null
+  };
+};
+
 
 export const setHomePageDataAction = (payload: IITems<IKenticoBlog>) => {
   return {
@@ -39,8 +48,10 @@ export const openFilterModalAction = (payload: { type: string }) => {
   };
 };
 
+
 export type Action =
   | ReturnType<typeof startLoadingAction>
   | ReturnType<typeof setHomePageDataAction>
   | ReturnType<typeof filterHomePageDataAction>
-  | ReturnType<typeof openFilterModalAction>;
+  | ReturnType<typeof openFilterModalAction>
+  | ReturnType<typeof stopLoadingAction>;

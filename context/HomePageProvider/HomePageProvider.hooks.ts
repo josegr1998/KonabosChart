@@ -8,6 +8,7 @@ import {
   openFilterModalAction,
   setHomePageDataAction,
   startLoadingAction,
+  stopLoadingAction,
 } from "./HomePageProvider.actions";
 import { getAllPostsByTypes } from "./HomePageProvider.helpers";
 
@@ -24,7 +25,9 @@ export const useHomePageActions = () => {
       const posts = await getAllPostsByTypes(types);
 
       dispatch(setHomePageDataAction(posts));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(stopLoadingAction());
+    }
   };
 
   const filterHomePageData = (filters: { date?: string; type?: string }) => {
