@@ -1,18 +1,14 @@
 import { Homepage } from "@/components/Homepage/Homepage";
-import {
-  usePosts,
-} from "@/components/Homepage/hooks";
+import HomePageProvider from "context/HomePageProvider/HomePageProvider";
 
 export default function Home() {
-  const { allPosts, isLoading } = usePosts();
 
   return (
     <>
       {
-        <Homepage
-          isLoading={isLoading}
-          posts={allPosts}
-        />
+       <HomePageProvider>
+          <Homepage />
+       </HomePageProvider> 
       }
     </>
   );

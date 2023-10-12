@@ -1,7 +1,6 @@
-import { IFilterState } from "@/components/Filter/IFIlterState";
 import { ILineFilterState } from "@/components/LineFilter/ILineFilterState";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useLineFilters = () => {
  const router = useRouter();
@@ -38,7 +37,7 @@ export const useLineFilters = () => {
 
   const selectedFilter = filterState[name];
 
-  const cleanedUpState = {} as IFilterState;
+  const cleanedUpState = {} as ILineFilterState;
 
   Object.keys(filterState).map((state) => {
    cleanedUpState[state] = {

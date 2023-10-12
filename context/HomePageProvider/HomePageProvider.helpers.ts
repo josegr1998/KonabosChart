@@ -16,6 +16,52 @@ export const getAllPostsByTypes = async (
   return posts;
 };
 
+export const getBarsChartData = (
+  filters: { date: string; type: string },
+  posts: IKenticoBlog[]
+) => {
+  const kenticoPrase = new KenticoParse();
+
+  const fromDate =
+    filters?.date === "All"
+      ? "2015"
+      : (filters?.date as string)
+      ? filters.date
+      : "2015";
+  const type = filters?.type ?? "All";
+
+  const postsFromDate = posts.filter((item) => {
+    const itemYear = item.date.rawData.value?.split("-")[0];
+
+    if (itemYear >= fromDate) {
+      return item;
+    }
+  });
+
+  const postsByType =
+    type !== "All"
+      ? postsFromDate.filter((post) => post.system.type === type)
+      : postsFromDate;
+
+  const authors = postsByType
+    .map((item) => {
+      if (item.author.value.length > 0) {
+        return kenticoPrase.authorParse(item.author.value[0]);
+      }
+    })
+    .filter((x) => x);
+
+  const authorsWithNumberOfPosts = getNumberOfPostsPerAuthor(authors);
+
+  const sortedAuthorsWithNumberOfPosts = authorsWithNumberOfPosts.sort(
+    (a, b) => {
+      return b.numberOfBlogPosts - a.numberOfBlogPosts;
+    }
+  );
+  return sortedAuthorsWithNumberOfPosts;
+};
+
+
 export const getNumberOfPostsPerAuthor = (
   authors: IAuthor[]
 ): IAuthorData[] => {
@@ -55,24 +101,28 @@ export const getNumberOfPostsPerAuthor = (
   return authorWithNumberOfPosts;
 };
 
-export const getAuthorWithMostPosts = (authors: IAuthorData[]) => {
-  const authorWithMostPosts = authors.reduce(
-    (acc, author: IAuthorData, index: number) => {
-      if (index > 0 && acc.numberOfBlogPosts < author.numberOfBlogPosts) {
-        acc = author;
-      } else if (index === 0) {
-        acc = author;
-      }
+export const getUserTableRowsData = (
+  posts: IKenticoBlog[],
+  types: string[]
+) => {
+  const mappedPosts = mapPostsData(posts);
 
-      return acc;
-    },
-    {
-      numberOfBlogPosts: 0,
-    }
-  );
+  const authorNames = getAllAuthorNamesFromPosts(mappedPosts);
 
-  return authorWithMostPosts;
+  const postsByAuthor = getAllPostsByAuthor({
+    authorNames,
+    posts: mappedPosts,
+  });
+
+  const mappedPostsByAuthor = mapPostsByAuthor({ postsByAuthor, types });
+
+  const sortedPostsByAuthor = sortPostsByAuthor(mappedPostsByAuthor);
+
+  const rowData = getRowData(sortedPostsByAuthor);
+
+  return rowData;
 };
+
 
 export const mapPostsData = (posts: IKenticoBlog[]): IPostData[] => {
   const kenticoParse = new KenticoParse();
@@ -80,7 +130,8 @@ export const mapPostsData = (posts: IKenticoBlog[]): IPostData[] => {
   return posts?.map((post) => kenticoParse.postParse(post));
 };
 
-export const getAllAuthorNamesFromPosts = (posts: IPostData[]): string[] => {
+
+const getAllAuthorNamesFromPosts = (posts: IPostData[]): string[] => {
   const allAuthorNames = posts?.reduce((acc, { author }) => {
     if (!acc.includes(author.name)) acc.push(author.name);
 
@@ -148,6 +199,7 @@ export const sortPostsByAuthor = (postsByAuthor) =>
     .sort((a, b) => b.totalPosts - a.totalPosts)
     .filter((post) => !post.author.name.includes("undefined"));
 
+
 export const getRowData = (postsByAuthor) => {
   const rowData = postsByAuthor?.map((row) => {
     return {
@@ -168,4 +220,54 @@ export const getRowData = (postsByAuthor) => {
   });
 
   return rowData;
+};
+
+
+export const openSelectedFilterModal = ({
+  currentFilterState,
+  selectedFilterName,
+}: {
+  currentFilterState;
+  selectedFilterName: string;
+}) => {
+  const currentFilterStateCopy = createDeepObjectClone(currentFilterState);
+
+  for (const key in currentFilterState) {
+    if (isFilterAlreadyOpen(currentFilterState, selectedFilterName)) {
+      currentFilterStateCopy[key].isFilterModalOpen = false;
+    } else if (isSelectedFilter(key, selectedFilterName)) {
+      currentFilterStateCopy[key].isFilterModalOpen = true;
+    } else {
+      currentFilterStateCopy[key].isFilterModalOpen = false;
+    }
+  }
+  console.log("currentFilterStateCopy", currentFilterStateCopy);
+  return currentFilterStateCopy;
+};
+
+const isSelectedFilter = (key: string, filterName: string) =>
+  key === filterName;
+
+const isFilterAlreadyOpen = (currentState, filterName: string) =>
+  currentState[filterName].isFilterModalOpen;
+
+export const createDeepObjectClone = (object) => JSON.parse(JSON.stringify(object));
+
+export const getAuthorWithMostPosts = (authors: IAuthorData[]) => {
+  const authorWithMostPosts = authors.reduce(
+    (acc, author: IAuthorData, index: number) => {
+      if (index > 0 && acc.numberOfBlogPosts < author.numberOfBlogPosts) {
+        acc = author;
+      } else if (index === 0) {
+        acc = author;
+      }
+
+      return acc;
+    },
+    {
+      numberOfBlogPosts: 0,
+    }
+  );
+
+  return authorWithMostPosts;
 };
